@@ -1,0 +1,19 @@
+# Baseline command-line tools
+brew "git"
+brew "gh"
+brew "jq"
+brew "ripgrep"
+brew "fd"
+brew "fzf"
+brew "tree"
+brew "shellcheck"
+
+# Core engineering and productivity applications
+cask "visual-studio-code"
+cask "iterm2"
+cask "maccy"
+cask "rectangle"
+cask "dbeaver-community"
+cask "microsoft-onenote"
+
+# Add role-specific tools only after reviewing the optional catalog in the runbook.

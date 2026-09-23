@@ -1,0 +1,23 @@
+# Machine-local knowledge and runtime state
+local/*
+!local/README.md
+
+# Generated or bulky evidence
+artifacts/generated/
+artifacts/logs/
+
+# Secrets and local configuration
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+*.token
+credentials.json
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+*.swp
