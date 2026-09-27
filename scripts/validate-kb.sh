@@ -42,16 +42,22 @@ required_files=(
   bootstrap/macos/Brewfile
   knowledge/README.md
   knowledge/project-overview.md
+  knowledge/agent-collaboration.md
+  knowledge/engineering-principles.md
+  knowledge/knowledge-lifecycle.md
   tasks/README.md
   tasks/active/README.md
   tasks/on-hold/README.md
   tasks/archive/README.md
   runbooks/README.md
   runbooks/macos-workstation-bootstrap.md
+  runbooks/jira-confluence-delivery.md
+  runbooks/knowledge-freshness-review.md
   artifacts/README.md
   local/README.md
   scripts/README.md
   scripts/new-task.sh
+  scripts/check-freshness.sh
   scripts/validate-kb.sh
   templates/README.md
   templates/task.md
@@ -68,6 +74,9 @@ check_text bootstrap/macos/Brewfile 'cask "maccy"' 'Brewfile must include Maccy'
 check_text bootstrap/macos/Brewfile 'cask "dbeaver-community"' 'Brewfile must include DBeaver Community'
 check_text bootstrap/macos/Brewfile 'cask "microsoft-onenote"' 'Brewfile must include Microsoft OneNote'
 check_text runbooks/macos-workstation-bootstrap.md 'Grab2Text' 'macOS runbook must cover Grab2Text'
+check_text index.md 'knowledge/knowledge-lifecycle.md' 'index.md must route to the knowledge lifecycle'
+check_text index.md 'runbooks/jira-confluence-delivery.md' 'index.md must route to the Jira and Confluence runbook'
+check_text index.md 'scripts/check-freshness.sh' 'index.md must route to the freshness check'
 
 for adapter in CLAUDE.md GEMINI.md .github/copilot-instructions.md; do
   check_text "$adapter" 'AGENTS.md' "$adapter must route to AGENTS.md"

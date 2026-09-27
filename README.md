@@ -16,6 +16,9 @@ way to:
 - preserve the current state of non-trivial work in one task note;
 - promote stable findings into durable project knowledge;
 - turn repeated workflows into validated runbooks or scripts;
+- choose deliberately between agent instructions, skills, tools, MCP integrations, and delegated agents;
+- coordinate Jira work and Confluence knowledge without confusing their responsibilities;
+- detect knowledge that needs review before stale guidance is reused;
 - keep raw evidence and machine-local state away from canonical guidance;
 - record confidence, sources, and staleness conditions instead of presenting guesses as facts.
 
@@ -55,6 +58,12 @@ way to:
 
    ```bash
    ./scripts/validate-kb.sh
+   ```
+
+6. Review maintained knowledge for age and explicit refresh triggers:
+
+   ```bash
+   ./scripts/check-freshness.sh
    ```
 
 Agents should begin with `AGENTS.md`, then use `index.md` to find only the context needed for the

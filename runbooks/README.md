@@ -25,3 +25,5 @@ Start from `../templates/runbook.md`. List new runbooks in this README so agents
 | Runbook | Purpose |
 | --- | --- |
 | `macos-workstation-bootstrap.md` | Prepare a secure, useful macOS engineering workstation. |
+| `jira-confluence-delivery.md` | Coordinate issue work and durable documentation across Jira and Confluence. |
+| `knowledge-freshness-review.md` | Review age signals and revalidate maintained knowledge against its sources. |

@@ -11,6 +11,10 @@
 
 Explain what this note helps an agent understand or decide.
 
+## Scope
+
+Define where the guidance applies, important exclusions, and the canonical owner of the subject.
+
 ## Current Understanding
 
 Record stable, source-backed facts. Separate inference when needed.
@@ -25,4 +29,6 @@ Explain how a future agent can recheck the important claims.
 
 ## References
 
-- Add precise source paths or official links.
+- Add precise repository-relative source paths, stable symbols or headings, official links, or
+  timestamped live-evidence references.
+- Identify the replacement when this note supersedes earlier guidance.

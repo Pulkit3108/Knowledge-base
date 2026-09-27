@@ -9,6 +9,7 @@ Stable project, architecture, domain, ownership, and decision context belongs he
 | `project-overview.md` | Project purpose, boundaries, architecture, commands, and source map. |
 | `agent-collaboration.md` | Practical guidance for efficient and reliable agent work. |
 | `engineering-principles.md` | Default implementation and review principles. |
+| `knowledge-lifecycle.md` | Capture, promote, reference, refresh, and retire durable knowledge. |
 
 ## Rules
 

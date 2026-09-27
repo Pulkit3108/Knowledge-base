@@ -18,8 +18,14 @@ Use this file to find the shortest reliable path for the current task.
 ## Fast Routing
 
 - Need to understand the project? Start with `knowledge/project-overview.md`.
+- Need to choose between an agent, skill, tool, or MCP integration? Read
+  `knowledge/agent-collaboration.md`.
+- Need to capture, promote, review, or retire knowledge? Read `knowledge/knowledge-lifecycle.md`.
 - Need current task state? Find the single relevant note under `tasks/active/` or `tasks/on-hold/`.
 - Need steps for a repeated operation? Check `runbooks/`.
+- Need to coordinate Jira and Confluence work? Follow `runbooks/jira-confluence-delivery.md`.
+- Need to review maintained knowledge for staleness? Follow
+  `runbooks/knowledge-freshness-review.md` and run `./scripts/check-freshness.sh`.
 - Need logs, exports, or captured evidence? Check `artifacts/` and verify freshness.
 - Need credentials, caches, or machine-specific configuration? Follow `local/README.md`; never
   commit the underlying values.
