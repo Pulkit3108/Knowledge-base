@@ -2,10 +2,11 @@
 
 ## Metadata
 
-- Last Reviewed: 2026-09-27
+- Last Reviewed: 2026-10-17
 - Sources: `../README.md`, `../AGENTS.md`, `../quick-start.md`, repository scripts, and templates
 - Confidence: high
-- Review When: repository structure, lifecycle rules, validation scripts, or supported agent entry points change
+- Review When: repository structure, lifecycle rules, validation scripts, operational capability
+  model, or supported agent instruction loading changes
 
 ## Purpose
 
@@ -24,7 +25,7 @@ different lifecycles or trust levels.
 
 ## Architecture
 
-`AGENTS.md` defines the common operating rules and `index.md` routes agents to the smallest relevant
+`AGENTS.md` is the only canonical instruction file and `index.md` routes agents to the smallest relevant
 source. `tasks/` holds current working context. Stable findings move into `knowledge/`, repeated
 procedures into `runbooks/`, and deterministic maintenance into `scripts/`. `artifacts/` preserves
 evidence with limitations, while `local/` holds ignored machine-specific state. Templates keep the
@@ -43,6 +44,7 @@ document shapes consistent without becoming live truth.
 | `scripts/` | Deterministic creation and validation helpers. |
 | `artifacts/` | Evidence that must retain provenance and limitations. |
 | `local/` | Ignored machine-specific or sensitive state. |
+| `templates/system-landscape.md` | Portable map for repositories, environments, delivery, data, observability, and capabilities. |
 
 ## Common Commands
 
@@ -57,13 +59,16 @@ document shapes consistent without becoming live truth.
 This starter does not prescribe an external system. Consuming projects should list their current
 repositories, official documentation, issue trackers, knowledge platforms, APIs, environments,
 data stores, and ownership contacts here without including credentials or secret locations.
+Use `../templates/system-landscape.md` for the detailed map and
+`operational-access-and-environments.md` for access and permission boundaries.
 
 ## Known Risks And Constraints
 
 - A copied knowledge base remains generic until `project-overview.md` and its permission boundaries
   are customized for the consuming project.
 - Maintained notes can become stale; `Review When` triggers take precedence over age alone.
-- Agent adapters must remain thin so different tools do not fork the workflow.
+- Agent-specific compatibility files are not committed by default; if a tool requires one, it must
+  remain a verified thin pointer so the workflow does not fork.
 - Validation checks structure and metadata, not the factual correctness of every claim.
 
 ## Open Questions

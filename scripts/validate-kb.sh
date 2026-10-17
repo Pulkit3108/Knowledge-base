@@ -33,9 +33,6 @@ required_files=(
   LICENSE
   CONTRIBUTING.md
   AGENTS.md
-  CLAUDE.md
-  GEMINI.md
-  .github/copilot-instructions.md
   index.md
   quick-start.md
   bootstrap/README.md
@@ -45,6 +42,7 @@ required_files=(
   knowledge/agent-collaboration.md
   knowledge/engineering-principles.md
   knowledge/knowledge-lifecycle.md
+  knowledge/operational-access-and-environments.md
   tasks/README.md
   tasks/active/README.md
   tasks/on-hold/README.md
@@ -53,6 +51,8 @@ required_files=(
   runbooks/macos-workstation-bootstrap.md
   runbooks/jira-confluence-delivery.md
   runbooks/knowledge-freshness-review.md
+  runbooks/bootstrap-knowledge-base.md
+  runbooks/end-to-end-agent-workflow.md
   artifacts/README.md
   local/README.md
   scripts/README.md
@@ -63,6 +63,7 @@ required_files=(
   templates/task.md
   templates/durable-note.md
   templates/runbook.md
+  templates/system-landscape.md
 )
 
 for file in "${required_files[@]}"; do
@@ -76,11 +77,15 @@ check_text bootstrap/macos/Brewfile 'cask "microsoft-onenote"' 'Brewfile must in
 check_text runbooks/macos-workstation-bootstrap.md 'Grab2Text' 'macOS runbook must cover Grab2Text'
 check_text index.md 'knowledge/knowledge-lifecycle.md' 'index.md must route to the knowledge lifecycle'
 check_text index.md 'runbooks/jira-confluence-delivery.md' 'index.md must route to the Jira and Confluence runbook'
+check_text index.md 'runbooks/end-to-end-agent-workflow.md' 'index.md must route to the end-to-end workflow'
+check_text index.md 'knowledge/operational-access-and-environments.md' 'index.md must route to operational access guidance'
 check_text index.md 'scripts/check-freshness.sh' 'index.md must route to the freshness check'
 
 for adapter in CLAUDE.md GEMINI.md .github/copilot-instructions.md; do
-  check_text "$adapter" 'AGENTS.md' "$adapter must route to AGENTS.md"
-  check_text "$adapter" 'index.md' "$adapter must route to index.md"
+  if [[ -f "$adapter" ]]; then
+    check_text "$adapter" 'AGENTS.md' "$adapter must route to AGENTS.md"
+    check_text "$adapter" 'index.md' "$adapter must route to index.md"
+  fi
 done
 
 for file in knowledge/*.md; do

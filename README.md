@@ -4,7 +4,8 @@ A small, reusable foundation for working with AI coding agents on any project.
 
 It keeps project knowledge, active-task context, repeatable procedures, evidence, and machine-local
 state in clearly separated places. The workflow is stored as ordinary Markdown and shell scripts,
-so it works with Codex, Claude Code, GitHub Copilot, Gemini CLI, and other repository-aware agents.
+so it can be used by any repository-aware agent that reads `AGENTS.md` directly or through a
+verified compatibility configuration.
 
 ## What This Solves
 
@@ -17,6 +18,8 @@ way to:
 - promote stable findings into durable project knowledge;
 - turn repeated workflows into validated runbooks or scripts;
 - choose deliberately between agent instructions, skills, tools, MCP integrations, and delegated agents;
+- resolve repositories, services, environments, APIs, databases, observability, and runtime targets;
+- deliver through branches, pull requests, builds, deployments, and post-deployment verification;
 - coordinate Jira work and Confluence knowledge without confusing their responsibilities;
 - detect knowledge that needs review before stale guidance is reused;
 - keep raw evidence and machine-local state away from canonical guidance;
@@ -27,9 +30,6 @@ way to:
 ```text
 .
 ├── AGENTS.md                    # Canonical instructions for every agent
-├── CLAUDE.md                    # Claude entry point
-├── GEMINI.md                    # Gemini entry point
-├── .github/copilot-instructions.md
 ├── index.md                     # Fast router
 ├── quick-start.md               # Canonical workflow
 ├── bootstrap/                   # New-system setup manifests
@@ -48,19 +48,21 @@ way to:
    folder inside that project.
 2. Replace the placeholder project information in `knowledge/project-overview.md`.
 3. Adjust permission boundaries and required checks in `AGENTS.md`.
-4. Create the first task:
+4. Complete a system and environment map from `templates/system-landscape.md`.
+5. Configure optional agent compatibility only if the selected tool cannot load `AGENTS.md`.
+6. Create the first task:
 
    ```bash
    ./scripts/new-task.sh short-task-name
    ```
 
-5. Validate the structure:
+7. Validate the structure:
 
    ```bash
    ./scripts/validate-kb.sh
    ```
 
-6. Review maintained knowledge for age and explicit refresh triggers:
+8. Review maintained knowledge for age and explicit refresh triggers:
 
    ```bash
    ./scripts/check-freshness.sh
@@ -68,6 +70,19 @@ way to:
 
 Agents should begin with `AGENTS.md`, then use `index.md` to find only the context needed for the
 current task.
+
+## Operating Model
+
+- [Operational access and environment model](knowledge/operational-access-and-environments.md)
+  defines read-only capabilities, write gates, and the context needed for repositories, CI/CD,
+  APIs, databases, observability, Kubernetes, and external knowledge.
+- [End-to-end agent workflow](runbooks/end-to-end-agent-workflow.md) covers intake, investigation,
+  implementation, branches, commit and push approval, PR creation and review, builds, deployments,
+  runtime verification, and handoff.
+- [Knowledge-base bootstrap](runbooks/bootstrap-knowledge-base.md) explains adoption, optional
+  agent compatibility, permissions, system mapping, skills, and MCP integration requests.
+- [System landscape template](templates/system-landscape.md) provides the portable structure a
+  consuming project fills with its verified repositories, environments, services, and access routes.
 
 ## Core Model
 
@@ -89,7 +104,8 @@ For a new Mac, start with the reviewed [macOS workstation bootstrap](runbooks/ma
 - Evidence before conclusions; current source before cached notes.
 - One task note per workstream, kept current rather than used as a transcript.
 - Scripts only after a workflow repeats or needs deterministic validation.
-- Agent-specific files remain thin adapters to the shared workflow.
+- `AGENTS.md` remains the only canonical instruction file; compatibility adapters are optional,
+  generated, and minimal.
 - Commit and push only when the human explicitly authorizes those Git actions.
 
 ## Scope

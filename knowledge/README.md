@@ -10,6 +10,7 @@ Stable project, architecture, domain, ownership, and decision context belongs he
 | `agent-collaboration.md` | Practical guidance for efficient and reliable agent work. |
 | `engineering-principles.md` | Default implementation and review principles. |
 | `knowledge-lifecycle.md` | Capture, promote, reference, refresh, and retire durable knowledge. |
+| `operational-access-and-environments.md` | Permission model and context required for Git, delivery, APIs, data, observability, and runtime work. |
 
 ## Rules
 

@@ -27,3 +27,5 @@ Start from `../templates/runbook.md`. List new runbooks in this README so agents
 | `macos-workstation-bootstrap.md` | Prepare a secure, useful macOS engineering workstation. |
 | `jira-confluence-delivery.md` | Coordinate issue work and durable documentation across Jira and Confluence. |
 | `knowledge-freshness-review.md` | Review age signals and revalidate maintained knowledge against its sources. |
+| `bootstrap-knowledge-base.md` | Adopt this KB in a new system and configure optional agent compatibility safely. |
+| `end-to-end-agent-workflow.md` | Move from task intake through source, PR, CI/CD, deployment, and runtime verification. |

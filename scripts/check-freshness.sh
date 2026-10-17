@@ -38,16 +38,16 @@ fi
 parse_date() {
   local value="$1"
 
-  if date -j -f '%Y-%m-%d' "$value" '+%s' >/dev/null 2>&1; then
-    date -j -f '%Y-%m-%d' "$value" '+%s'
-  elif date -d "$value" '+%s' >/dev/null 2>&1; then
-    date -d "$value" '+%s'
+  if date -j -f '%Y-%m-%d %H:%M:%S' "$value 00:00:00" '+%s' >/dev/null 2>&1; then
+    date -j -f '%Y-%m-%d %H:%M:%S' "$value 00:00:00" '+%s'
+  elif date -d "$value 00:00:00" '+%s' >/dev/null 2>&1; then
+    date -d "$value 00:00:00" '+%s'
   else
     return 1
   fi
 }
 
-now_epoch="$(date '+%s')"
+now_epoch="$(parse_date "$(date '+%Y-%m-%d')")"
 checked=0
 stale=0
 invalid=0

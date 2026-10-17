@@ -19,8 +19,10 @@ and AI agents.
 - standard document shape: `templates/`;
 - new-system declarative setup: `bootstrap/`.
 
-Agent-specific instruction files must remain thin pointers to `AGENTS.md`; do not fork the canonical
-rules for individual tools.
+`AGENTS.md` is the only canonical instruction file. Do not commit agent-specific adapters by
+default. If a consuming project requires one, follow `runbooks/bootstrap-knowledge-base.md`, keep
+it as a minimal pointer to `AGENTS.md` and `index.md`, and verify the selected tool actually loads
+it.
 
 ## Validation
 

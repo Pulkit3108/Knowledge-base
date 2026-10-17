@@ -1,7 +1,12 @@
 # Agent Instructions
 
-These are the canonical repository instructions. Agent-specific entry files must point here rather
-than duplicate these rules.
+This is the only canonical repository instruction file. The knowledge model and workflows are
+agent- and integration-neutral: any agent may use them through whatever local tools, scripts,
+skills, APIs, or protocol integrations the consuming project has verified. Do not add `CLAUDE.md`,
+`GEMINI.md`, `.github/copilot-instructions.md`, or another agent-specific instruction file by
+default. When a selected tool cannot load `AGENTS.md` directly or through configuration, follow
+`runbooks/bootstrap-knowledge-base.md` to create the smallest verified compatibility adapter
+without duplicating these rules.
 
 ## Start Here
 
@@ -12,7 +17,8 @@ For non-trivial work:
 3. read the relevant files under `knowledge/` and `runbooks/`;
 4. create or resume exactly one task note under `tasks/active/`;
 5. keep that note current at material checkpoints;
-6. run `./scripts/validate-kb.sh` after structural or workflow changes.
+6. resolve the target repository, system, environment, and permission gates before acting; and
+7. run `./scripts/validate-kb.sh` after structural or workflow changes.
 
 Do not load the entire knowledge base by default. Follow the router and read only what the task
 requires.
@@ -39,18 +45,35 @@ requires.
 - Promote a repeated procedure into `runbooks/` and repeated deterministic maintenance into
   `scripts/`.
 - Keep large outputs out of task notes. Store necessary evidence under `artifacts/` and link it.
+- Ask for help when authoritative sources conflict, the target or environment cannot be resolved,
+  a required capability is unavailable, or proceeding would depend on an unsafe assumption. Do not
+  invent details to avoid a necessary question.
 
 ## Permission And Safety Boundaries
 
-- Read-only inspection is allowed when it is relevant to the assigned task.
+- Relevant read-only inspection is allowed across source repositories, pull requests, CI/CD status
+  and logs, deployed APIs, databases, observability systems, Kubernetes resources, issue trackers,
+  knowledge platforms, and communication systems when access is available.
 - Editing files is allowed only within the user-requested scope.
-- A request to edit or fix does not authorize committing, pushing, creating branches, opening pull
-  requests, merging, deploying, or changing external systems.
-- Require explicit current authorization before each material external write or Git publication
-  step.
+- A local branch may be created when the requested workflow needs isolation and the correct base,
+  target, naming convention, and working-tree ownership are verified. A consuming repository may
+  impose a stricter branch-creation gate.
+- A request to edit or fix never authorizes a commit or push. Require explicit current approval
+  before each commit and push.
+- Pull-request creation, review submission, comments, approvals, merges, deployments, build
+  triggers, API mutations, database writes, runtime changes, and other external writes require
+  explicit approval unless the user already requested that exact action in the current task.
+- Read-only database access means bounded queries that do not lock or mutate state. DML, DDL,
+  stored procedures with side effects, `SELECT FOR UPDATE`, and equivalent operations are writes.
+- Kubernetes reads such as listing resources, describing objects, reading logs and events, and
+  inspecting existing metrics are allowed when relevant. Applying manifests, scaling, restarting,
+  deleting, executing mutating commands, attaching an intrusive profiler, or creating a diagnostic
+  artifact that can affect the workload requires explicit approval.
 - Confirm exact targets before destructive, irreversible, production, or security-sensitive work.
 - Never store secrets, access tokens, private keys, session cookies, or unredacted sensitive data.
 - Preserve unrelated user changes in dirty working trees.
+- Follow `knowledge/operational-access-and-environments.md` for the complete capability matrix and
+  `runbooks/end-to-end-agent-workflow.md` for delivery flow.
 
 ## Coding Principles
 
@@ -71,6 +94,20 @@ requires.
 - `artifacts/`: raw or generated evidence with provenance and limitations.
 - `local/`: ignored machine-specific state and sensitive operational material.
 - `templates/`: standard document shapes, not live project truth.
+
+## Operational Context
+
+A consuming project must maintain enough source-backed context to resolve:
+
+- repositories, services, dependencies, owners, and authoritative documentation;
+- environments, regions, clusters, namespaces, accounts, databases, and deployment mappings;
+- branch, build, release, and rollback conventions;
+- API, database, observability, and Kubernetes access routes;
+- available tools, protocol integrations such as MCP, skills, authentication ownership, and
+  read/write boundaries.
+
+Start from `templates/system-landscape.md`. Keep volatile or sensitive values in approved external
+systems or ignored local state, and link to them without copying credentials.
 
 ## Completion Standard
 

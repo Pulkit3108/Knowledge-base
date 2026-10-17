@@ -8,6 +8,12 @@ Complete `knowledge/project-overview.md` with the repository purpose, architectu
 commands, ownership boundaries, external systems, and known risks. Link authoritative sources
 instead of copying large documents.
 
+Create a project-specific system landscape from `templates/system-landscape.md` so an agent can
+resolve repositories, services, environments, pipelines, APIs, databases, observability, runtime
+targets, owners, and available capabilities. Use
+`knowledge/operational-access-and-environments.md` as the default permission model and document
+stricter project exceptions.
+
 ## 2. Start Non-Trivial Work
 
 Create one task note:
@@ -45,6 +51,10 @@ Use this evidence order:
 
 Keep raw evidence under `artifacts/`. Put reusable conclusions under `knowledge/`. Put repeatable
 steps under `runbooks/`.
+
+Use `runbooks/end-to-end-agent-workflow.md` when work crosses source control, pull requests,
+CI/CD, deployments, APIs, databases, observability, or Kubernetes. Read-only access does not imply
+permission to mutate the same system.
 
 ## 4. Validate Proportionally
 
@@ -126,3 +136,8 @@ provenance are recorded differently.
 Editing permission is not publishing permission. Require explicit user authorization before
 committing, pushing, creating or merging pull requests, deploying, changing tickets or documents,
 or mutating external systems. Verify the exact target and read back the result when practical.
+
+Relevant read-only inspection may include source and PRs, build and deployment status and logs,
+safe APIs, bounded database queries, logs, metrics, alarms, traces, Kubernetes resources, and
+authorized external context. Classify the actual operation rather than relying only on an HTTP
+method, SQL keyword, or tool name. Follow `knowledge/operational-access-and-environments.md`.

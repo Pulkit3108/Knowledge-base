@@ -2,10 +2,11 @@
 
 ## Metadata
 
-- Last Reviewed: 2026-09-27
+- Last Reviewed: 2026-10-17
 - Sources: `../AGENTS.md`, `../quick-start.md`, `knowledge-lifecycle.md`, and the repository task workflow
 - Confidence: high
-- Review When: the repository instruction hierarchy or task lifecycle changes
+- Review When: the repository instruction hierarchy, task lifecycle, capability model, or supported
+  tool integrations change
 
 ## Give The Agent A Verifiable Outcome
 
@@ -44,12 +45,18 @@ file does not automatically include permission to commit, push, deploy, or updat
 
 ## Use Any Agent Without Forking The Workflow
 
-Agent-specific files should only direct the tool to `AGENTS.md` and `index.md`. Project knowledge,
-task state, runbooks, and validation remain tool-neutral and version-controlled.
+`AGENTS.md` is the only canonical instruction file. Prefer tools that read it directly or can be
+configured to use it. Create a vendor-specific compatibility file only when current official
+documentation and a real consuming tool require one; keep it as a minimal pointer to `AGENTS.md`
+and `index.md` and record when it can be removed. Project knowledge, task state, runbooks, and
+validation remain tool-neutral and version-controlled. Product names in bootstrap examples are
+illustrative, not a supported-tool allowlist. Any agent or integration may participate when its
+instruction-loading behavior, access boundary, and validation path are known.
 
 ## Understand The Capability Layers
 
-Use the smallest capability that safely completes the work:
+These capability layers describe roles, not particular products or protocols. Use the smallest
+capability that safely completes the work:
 
 | Capability | Primary purpose | Use it when | Do not treat it as |
 | --- | --- | --- | --- |
@@ -112,3 +119,35 @@ When similar work recurs, update the task note first, then use the promotion lad
 
 Do not create a tool or MCP server merely because an API exists. Require a recurring use case, a
 clear trust boundary, owned authentication, predictable failure behavior, and a validation path.
+
+## Resolve Capability Gaps Deliberately
+
+When a workflow needs a capability that is not available, do not invent a command, silently switch
+integrations, or weaken the workflow. Record a capability request with:
+
+- the user outcome and repeated use cases;
+- target systems, environments, objects, and owners;
+- required read operations and separately listed write operations;
+- authentication and secret ownership;
+- least-privilege scopes and approval gates;
+- inputs, outputs, schemas, pagination, rate limits, timeouts, and error behavior;
+- audit, redaction, retention, and sensitive-data requirements;
+- dry-run, readback, health check, and test strategy;
+- the skill, runbook, script, tool, or MCP layer that should own each part; and
+- fallback and stop behavior when the capability is unavailable.
+
+Use a skill when agents need a reusable decision and procedure across variable contexts. Use an MCP
+integration when agents need governed access to an external API or resource. A common workflow may
+need both: the MCP exposes bounded operations, while the skill defines target resolution,
+permission checks, sequencing, validation, and reporting.
+
+Prefer read-only operations first. Expose mutations only when the API contract, authorization
+model, idempotency, readback, audit, and recovery path are understood. The presence of a write tool
+does not grant permission to use it.
+
+When the user requests the missing capability, the agent may author a repository-local skill or MCP
+implementation within the approved file scope. Treat installation into shared tooling, credential
+configuration, registration, deployment, publication, and external-system test writes as separate
+actions with their own permission gates. Validate a skill against representative tasks and validate
+an MCP with schema tests, safe read operations, controlled failure cases, and readback for every
+approved mutation.
